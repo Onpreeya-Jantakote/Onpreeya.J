@@ -27,14 +27,6 @@ A personal profile web page built with **Next.js 14**, **React**, and **Material
 
 ---
 
-## 📸 Screenshots
-
-> _(Insert screenshots of the Profile Page, Skills section, and Navbar here)_  
-> Example:
-> ![Profile Screenshot](./public/screenshot.png)
-
----
-
 ## 🚦 Pages & Routing
 
 | Path        | Description        |
