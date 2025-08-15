@@ -1,6 +1,7 @@
 "use client";
 import { Box, Typography, Grid } from "@mui/material";
 import ProjectCard from "./ProjectCard";
+import { Stack } from "@mui/system";
 
 const projects = [
   {
@@ -68,13 +69,11 @@ export default function MyWork() {
         My Projects
       </Typography>
 
-      <Grid container spacing={6}>
+      <Stack spacing={6}>
         {projects.map((project, index) => (
-          <Grid item xs={12} key={project.title}>
-            <ProjectCard {...project} reverse={index % 2 === 1} />
-          </Grid>
+          <ProjectCard key={project.title} {...project} reverse={index % 2 === 1} />
         ))}
-      </Grid>
+      </Stack>
     </Box>
   );
 }
