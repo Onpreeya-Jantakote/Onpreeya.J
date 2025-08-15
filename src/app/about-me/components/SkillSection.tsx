@@ -23,6 +23,7 @@ const responsive = {
 export default function SkillSection({ title, skills }: SkillSectionProps) {
   return (
     <Box mt={4} textAlign="center">
+      {/* Title */}
       <Box
         display="inline-block"
         sx={{
@@ -39,8 +40,17 @@ export default function SkillSection({ title, skills }: SkillSectionProps) {
         {title}
       </Box>
 
+      {/* Carousel */}
       <Box sx={{ maxWidth: 550, mx: "auto" }}>
-        <Carousel responsive={responsive} arrows infinite itemClass="carousel-item-padding-0">
+        <Carousel
+          responsive={responsive}
+          arrows={false}
+          infinite
+          autoPlay
+          autoPlaySpeed={2000}
+          pauseOnHover={true}
+          itemClass="carousel-item-padding-0"
+        >
           {skills.map((skill) => (
             <CircleSkill key={skill.name} {...skill} />
           ))}
