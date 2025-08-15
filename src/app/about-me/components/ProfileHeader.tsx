@@ -43,7 +43,7 @@ export default function ProfileHeader() {
     <Box textAlign="center" mt={4}>
       <PurpleCircle>
         <Avatar
-          src="/profile.jpg"
+          src="/profile/me.jpg"
           alt="Profile"
           sx={{ width: 150, height: 150 }}
         />
