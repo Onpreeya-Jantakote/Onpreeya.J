@@ -1,4 +1,3 @@
-"use client";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -7,9 +6,16 @@ interface ProjectCardProps {
   title: string;
   details: { label: string; text: string }[];
   reverse?: boolean;
+  link?: string; 
 }
 
-export default function ProjectCard({ image, title, details, reverse = false }: ProjectCardProps) {
+export default function ProjectCard({
+  image,
+  title,
+  details,
+  reverse = false,
+  link,
+}: ProjectCardProps) {
   return (
     <Box
       sx={{
@@ -20,13 +26,25 @@ export default function ProjectCard({ image, title, details, reverse = false }: 
       }}
     >
       <Box sx={{ flex: 1 }}>
-        <Image
-          src={image}
-          alt={title}
-          width={500}
-          height={500}
-          style={{ width: "100%", height: "auto", borderRadius: 16 }}
-        />
+        {link ? (
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            <Image
+              src={image}
+              alt={title}
+              width={500}
+              height={500}
+              style={{ width: "100%", height: "auto", borderRadius: 16, cursor: "pointer" }}
+            />
+          </a>
+        ) : (
+          <Image
+            src={image}
+            alt={title}
+            width={500}
+            height={500}
+            style={{ width: "100%", height: "auto", borderRadius: 16 }}
+          />
+        )}
       </Box>
 
       <Box sx={{ flex: 1 }}>
