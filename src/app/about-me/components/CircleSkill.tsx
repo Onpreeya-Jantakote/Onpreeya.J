@@ -1,55 +1,65 @@
 "use client";
 import { Box, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 
-export default function CircleSkill({
-  name,
-  percent,
-}: {
+interface CircleSkillProps {
   name: string;
   percent: number;
-}) {
-  const size = 120;
-  const gradient = `conic-gradient(#786CFF ${percent * 3.6}deg, #D9D9D9 0deg)`;
+}
+
+export default function CircleSkill({ name, percent }: CircleSkillProps) {
+  const radius = 50;
+  const stroke = 8;
+  const normalizedRadius = radius - stroke / 2;
+  const circumference = 2 * Math.PI * normalizedRadius;
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 1,
-      }}
-    >
-      <Box
-        sx={{
-          width: size,
-          height: size,
-          borderRadius: "50%",
-          background: gradient,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 1,
-        }}
-      >
+    <Box textAlign="center" sx={{ p: 2 }}>
+      <Box sx={{ position: "relative", width: 120, height: 120, margin: "0 auto" }}>
+        <svg height={120} width={120}>
+          {/* Background circle */}
+          <circle
+            stroke="#E5E5FF"
+            fill="transparent"
+            strokeWidth={stroke}
+            r={normalizedRadius}
+            cx="60"
+            cy="60"
+          />
+          {/* Progress circle */}
+          <motion.circle
+            stroke="#899EFF"
+            fill="transparent"
+            strokeWidth={stroke}
+            r={normalizedRadius}
+            cx="60"
+            cy="60"
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference}
+            initial={{ strokeDashoffset: circumference }}
+            animate={{ strokeDashoffset: circumference - (percent / 100) * circumference }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            strokeLinecap="round"
+            transform="rotate(-90 60 60)"
+          />
+        </svg>
+
+        {/* Percent Text */}
         <Box
           sx={{
-            width: size - 20,
-            height: size - 20,
-            backgroundColor: "white",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
           }}
         >
-          <Typography variant="h6" color="#786CFF">
+          <Typography variant="h6" fontWeight="bold">
             {percent}%
           </Typography>
         </Box>
       </Box>
-      <Typography sx={{ mt: 1, color: "#4C69EB" }}>{name}</Typography>
+
+      <Typography mt={1}>{name}</Typography>
     </Box>
   );
 }
